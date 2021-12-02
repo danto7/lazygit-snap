@@ -1,17 +1,18 @@
 name: lazygit
-base: core20 # the base snap is the execution environment for this snap
-version: '0.31.4' # just for humans, typically '1.2+git' or '1.3.2'
+base: core20
+version: '0.31.4'
 summary: simple terminal UI for git commands
 description: |
   A simple terminal UI for git commands, written in Go with the gocui library.
 
-grade: devel # must be 'stable' to release into candidate/stable channels
-confinement: devmode # use 'strict' once you have the right plugs and slots
+grade: stable
+confinement: strict
 
 parts:
   lazygit:
     plugin: go
     source: git://github.com/jesseduffield/lazygit.git
+    source-tag: v0.31.4
     stage-packages:
     - git
     organize:
