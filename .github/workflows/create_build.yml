@@ -24,12 +24,11 @@ jobs:
       - uses: actions/checkout@v2
       
       - uses: octokit/graphql-action@v2.x
-        id: get_latest_release
+        id: get_latest_upstream_release
         with:
           query: |
             query { 
               repository(name: "lazygit", owner: "jesseduffield"){
-                name
                 latestRelease {
                   tagName
                 }
@@ -37,4 +36,20 @@ jobs:
             }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo 'latest release: ${{ steps.get_latest_release.outputs.data }}'"
+      - uses: octokit/graphql-action@v2.x
+        id: get_latest_own_release
+        with:
+          query: |
+            query { 
+              repository(name: "lazygit-snap", owner: "danto7"){
+                latestRelease {
+                  tagName
+                }
+              }
+            }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: "echo $UPSTREAM_VERSION $OWN_VERSION"
+        env:
+          UPSTREAM_VERSION: ${{ fromJson(steps.get_latest_upstream_release.outputs.data).data.repository.latestRelease.tagName }}
+          OWN_VERSION: ${{ fromJson(steps.get_latest_own_release.outputs.data).data.repository.latestRelease.tagName }}
