@@ -28,6 +28,7 @@ jobs:
         run: |
           curl https://api.github.com/graphql \
             -H 'content-type: application/json' \
+            -H "Authorization: bearer $GITHUB_TOKEN" \
             --data 'query { 
               repository(name: "lazygit", owner: "jesseduffield"){
                 name
