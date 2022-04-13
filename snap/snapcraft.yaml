@@ -11,7 +11,7 @@ confinement: strict
 parts:
   lazygit:
     plugin: go
-    source: git://github.com/jesseduffield/lazygit.git
+    source: https://github.com/jesseduffield/lazygit.git
     source-tag: v0.34
     stage-packages:
     - git
