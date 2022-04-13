@@ -1,6 +1,6 @@
 name: lazygit
 base: core20
-version: '0.33'
+version: '0.34'
 summary: simple terminal UI for git commands
 description: |
   A simple terminal UI for git commands, written in Go with the gocui library.
@@ -12,7 +12,7 @@ parts:
   lazygit:
     plugin: go
     source: git://github.com/jesseduffield/lazygit.git
-    source-tag: v0.33
+    source-tag: v0.34
     stage-packages:
     - git
     organize:
